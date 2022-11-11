@@ -11,8 +11,7 @@ public static class RoutesExtensions
         return group.MapGet(template, (IMediator mediator, [AsParameters] TRequest request) =>
             mediator.Send(request)
         )
-        .WithName(typeof(TRequest).Name)
-        .WithOpenApi();
+        .WithName(typeof(TRequest).Name);
     }
 
     public static RouteHandlerBuilder MediatrPost<TRequest>(this RouteGroupBuilder group, string template)
@@ -21,8 +20,7 @@ public static class RoutesExtensions
         return group.MapPost(template, (IMediator mediator, [AsParameters] TRequest request) =>
             mediator.Send(request)
         )
-        .WithName(typeof(TRequest).Name)
-        .WithOpenApi();
+        .WithName(typeof(TRequest).Name);
     }
 
     public static RouteHandlerBuilder MediatrPut<TRequest>(this RouteGroupBuilder group, string template)
@@ -31,8 +29,7 @@ public static class RoutesExtensions
         return group.MapPut(template, (IMediator mediator, [AsParameters] TRequest request) =>
             mediator.Send(request)
         )
-        .WithName(typeof(TRequest).Name)
-        .WithOpenApi();
+        .WithName(typeof(TRequest).Name);
     }
 
     public static RouteHandlerBuilder MediatrDelete<TRequest>(this RouteGroupBuilder group, string template)
@@ -41,7 +38,6 @@ public static class RoutesExtensions
         return group.MapDelete(template, (IMediator mediator, [AsParameters] TRequest request) =>
             mediator.Send(request)
         )
-        .WithName(typeof(TRequest).Name)
-        .WithOpenApi();
+        .WithName(typeof(TRequest).Name);
     }
 }
