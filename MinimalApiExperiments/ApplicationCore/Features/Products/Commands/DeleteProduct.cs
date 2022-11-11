@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using MinimalApiExperiments.ApplicationCore.Common;
+using MinimalApiExperiments.ApplicationCore.Common.Interfaces;
 using MinimalApiExperiments.ApplicationCore.Infrastructure.Persistence;
 
 namespace MinimalApiExperiments.ApplicationCore.Features.Products.Commands;

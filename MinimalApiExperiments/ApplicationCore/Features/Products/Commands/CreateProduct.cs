@@ -2,16 +2,16 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using MinimalApiExperiments.ApplicationCore.Common;
+using MinimalApiExperiments.ApplicationCore.Common.Interfaces;
 using MinimalApiExperiments.ApplicationCore.Domain.Entities;
 using MinimalApiExperiments.ApplicationCore.Infrastructure.Persistence;
 
 namespace MinimalApiExperiments.ApplicationCore.Features.Products.Commands;
 public class CreateProduct : IHttpRequest
 {
-    public Body Product { get; set; } = default!;
+    public CreateProductBody Product { get; set; } = default!;
 
-    public class Body
+    public class CreateProductBody
     {
         public string Description { get; set; } = default!;
         public double Price { get; set; }

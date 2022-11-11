@@ -3,7 +3,7 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using MinimalApiExperiments.ApplicationCore.Common;
+using MinimalApiExperiments.ApplicationCore.Common.Interfaces;
 using MinimalApiExperiments.ApplicationCore.Domain.Entities;
 using MinimalApiExperiments.ApplicationCore.Infrastructure.Persistence;
 

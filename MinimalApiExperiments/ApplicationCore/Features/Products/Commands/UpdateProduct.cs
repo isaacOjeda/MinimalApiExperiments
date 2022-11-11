@@ -1,15 +1,15 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using MinimalApiExperiments.ApplicationCore.Common;
+using MinimalApiExperiments.ApplicationCore.Common.Interfaces;
 using MinimalApiExperiments.ApplicationCore.Infrastructure.Persistence;
 
 namespace MinimalApiExperiments.ApplicationCore.Features.Products.Commands;
 public class UpdateProduct : IHttpRequest
 {
-    public Body Product { get; set; } = default!;
+    public UpdateProductBody Product { get; set; } = default!;
 
-    public class Body
+    public class UpdateProductBody
     {
         public int ProductId { get; set; }
         public string Description { get; set; } = string.Empty;
