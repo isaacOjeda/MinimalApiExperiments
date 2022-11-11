@@ -1,15 +1,13 @@
-﻿using ApplicationCore.Domain.Entities;
+﻿using ApplicationCore.Common;
+using ApplicationCore.Domain.Entities;
 using ApplicationCore.Infrastructure.Persistence;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ApplicationCore.Features.Products.Commands;
-public class CreateProduct : IRequest<Created<Product>>
+public class CreateProduct : IHttpRequest
 {
-    [FromBody]
     public Body Data { get; set; }
 
     public class Body
@@ -19,7 +17,7 @@ public class CreateProduct : IRequest<Created<Product>>
     }
 }
 
-public class CreateProductHandler : IRequestHandler<CreateProduct, Created<Product>>
+public class CreateProductHandler : IRequestHandler<CreateProduct, IResult>
 {
     private readonly AppDbContext _context;
 
@@ -28,7 +26,7 @@ public class CreateProductHandler : IRequestHandler<CreateProduct, Created<Produ
         _context = context;
     }
 
-    public async Task<Created<Product>> Handle(CreateProduct request, CancellationToken cancellationToken)
+    public async Task<IResult> Handle(CreateProduct request, CancellationToken cancellationToken)
     {
         var newProduct = new Product
         {
@@ -40,7 +38,7 @@ public class CreateProductHandler : IRequestHandler<CreateProduct, Created<Produ
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return TypedResults.Created($"api/products/{newProduct.ProductId}", newProduct);
+        return Results.Created($"api/products/{newProduct.ProductId}", newProduct);
     }
 }
 

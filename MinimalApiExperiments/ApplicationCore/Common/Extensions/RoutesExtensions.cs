@@ -8,7 +8,7 @@ public static class RoutesExtensions
 {
 
     public static RouteGroupBuilder MediatrGet<TRequest, TResponse>(this RouteGroupBuilder group, string template)
-        where TRequest : IRequest<TResponse>
+        where TRequest : IHttpRequest
     {
         group.MapGet(template, (IMediator mediator, [AsParameters] TRequest request) =>
             mediator.Send(request)
@@ -19,7 +19,7 @@ public static class RoutesExtensions
     }
 
     public static RouteGroupBuilder MediatrPost<TRequest, TResponse>(this RouteGroupBuilder group, string template)
-        where TRequest : IRequest<TResponse>
+        where TRequest : IHttpRequest
     {
         group.MapPost(template, (IMediator mediator, [AsParameters] TRequest request) =>
             mediator.Send(request)

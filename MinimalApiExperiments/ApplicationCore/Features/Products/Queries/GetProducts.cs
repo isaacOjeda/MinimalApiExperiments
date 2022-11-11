@@ -1,18 +1,20 @@
-﻿using ApplicationCore.Domain.Entities;
+﻿using ApplicationCore.Common;
+using ApplicationCore.Domain.Entities;
 using ApplicationCore.Infrastructure.Persistence;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApplicationCore.Features.Products.Queries;
 
-public class GetProducts : IRequest<List<GetProductsResponse>>
+public class GetProducts : IHttpRequest
 {
 
 }
 
-public class GetProductsHandler : IRequestHandler<GetProducts, List<GetProductsResponse>>
+public class GetProductsHandler : IRequestHandler<GetProducts, IResult>
 {
     private readonly AppDbContext _context;
     private readonly IMapper _mapper;
@@ -23,10 +25,11 @@ public class GetProductsHandler : IRequestHandler<GetProducts, List<GetProductsR
         _mapper = mapper;
     }
 
-    public Task<List<GetProductsResponse>> Handle(GetProducts request, CancellationToken cancellationToken) =>
-        _context.Products
-            .ProjectTo<GetProductsResponse>(_mapper.ConfigurationProvider)
-            .ToListAsync();
+    public async Task<IResult> Handle(GetProducts request, CancellationToken cancellationToken) =>
+        Results.Ok(
+            await _context.Products
+                .ProjectTo<GetProductsResponse>(_mapper.ConfigurationProvider)
+                .ToListAsync());
 }
 
 public class GetProductsResponse
