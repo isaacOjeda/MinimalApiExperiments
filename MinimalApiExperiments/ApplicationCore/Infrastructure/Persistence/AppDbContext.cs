@@ -1,7 +1,7 @@
-﻿using ApplicationCore.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using MinimalApiExperiments.ApplicationCore.Domain.Entities;
 
-namespace ApplicationCore.Infrastructure.Persistence;
+namespace MinimalApiExperiments.ApplicationCore.Infrastructure.Persistence;
 public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options)

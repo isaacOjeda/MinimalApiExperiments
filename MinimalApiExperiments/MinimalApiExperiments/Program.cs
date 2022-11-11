@@ -1,5 +1,6 @@
-using ApplicationCore;
-using ApplicationCore.Features.Products;
+using MinimalApiExperiments.ApplicationCore;
+using MinimalApiExperiments.ApplicationCore.Features.Products;
+using MinimalApiExperiments.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 

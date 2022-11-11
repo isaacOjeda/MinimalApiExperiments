@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 
-namespace ApplicationCore.Common;
+namespace MinimalApiExperiments.ApplicationCore.Common;
 public interface IHttpRequest : IRequest<IResult>
 {
 }

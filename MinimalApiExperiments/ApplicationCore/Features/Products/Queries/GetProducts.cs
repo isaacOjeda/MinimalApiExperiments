@@ -1,13 +1,13 @@
-﻿using ApplicationCore.Common;
-using ApplicationCore.Domain.Entities;
-using ApplicationCore.Infrastructure.Persistence;
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using MinimalApiExperiments.ApplicationCore.Common;
+using MinimalApiExperiments.ApplicationCore.Domain.Entities;
+using MinimalApiExperiments.ApplicationCore.Infrastructure.Persistence;
 
-namespace ApplicationCore.Features.Products.Queries;
+namespace MinimalApiExperiments.ApplicationCore.Features.Products.Queries;
 
 public class GetProducts : IHttpRequest
 {

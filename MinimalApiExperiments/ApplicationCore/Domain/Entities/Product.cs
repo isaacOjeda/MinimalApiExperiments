@@ -1,4 +1,4 @@
-﻿namespace ApplicationCore.Domain.Entities;
+﻿namespace MinimalApiExperiments.ApplicationCore.Domain.Entities;
 
 public class Product
 {

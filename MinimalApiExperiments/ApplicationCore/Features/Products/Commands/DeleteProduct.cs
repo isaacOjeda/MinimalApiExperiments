@@ -1,9 +1,9 @@
-﻿using ApplicationCore.Common;
-using ApplicationCore.Infrastructure.Persistence;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Http;
+using MinimalApiExperiments.ApplicationCore.Common;
+using MinimalApiExperiments.ApplicationCore.Infrastructure.Persistence;
 
-namespace ApplicationCore.Features.Products.Commands;
+namespace MinimalApiExperiments.ApplicationCore.Features.Products.Commands;
 public class DeleteProduct : IHttpRequest
 {
     public int ProductId { get; set; }

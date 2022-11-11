@@ -1,10 +1,10 @@
-﻿using ApplicationCore.Common;
-using ApplicationCore.Infrastructure.Persistence;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using MinimalApiExperiments.ApplicationCore.Common;
+using MinimalApiExperiments.ApplicationCore.Infrastructure.Persistence;
 
-namespace ApplicationCore.Features.Products.Commands;
+namespace MinimalApiExperiments.ApplicationCore.Features.Products.Commands;
 public class UpdateProduct : IHttpRequest
 {
     public Body Product { get; set; } = default!;

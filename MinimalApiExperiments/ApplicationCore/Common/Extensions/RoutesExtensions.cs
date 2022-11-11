@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using MinimalApiExperiments.ApplicationCore.Common;
 
-namespace ApplicationCore.Common.Extensions;
+namespace MinimalApiExperiments.ApplicationCore.Common.Extensions;
 public static class RoutesExtensions
 {
 

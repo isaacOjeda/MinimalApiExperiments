@@ -1,11 +1,11 @@
-﻿using ApplicationCore.Common;
-using ApplicationCore.Domain.Entities;
-using ApplicationCore.Infrastructure.Persistence;
+﻿using ApplicationCore.Domain.Entities;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using MinimalApiExperiments.ApplicationCore.Common;
+using MinimalApiExperiments.ApplicationCore.Infrastructure.Persistence;
 
-namespace ApplicationCore.Features.Products.Commands;
+namespace MinimalApiExperiments.ApplicationCore.Features.Products.Commands;
 public class CreateProduct : IHttpRequest
 {
     public Body Product { get; set; } = default!;

@@ -3,7 +3,7 @@ using MinimalApiExperiments.ApplicationCore.Common.Extensions;
 using MinimalApiExperiments.ApplicationCore.Features.Products.Commands;
 using MinimalApiExperiments.ApplicationCore.Features.Products.Queries;
 
-namespace MinimalApiExperiments.ApplicationCore.Features.Products;
+namespace MinimalApiExperiments.Modules;
 public static class ProductsModule
 {
     public static RouteGroupBuilder AddProductsModule(this RouteGroupBuilder group)
