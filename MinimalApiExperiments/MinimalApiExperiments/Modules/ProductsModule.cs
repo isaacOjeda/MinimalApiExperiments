@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Routing;
-using MinimalApiExperiments.ApplicationCore.Common.Extensions;
 using MinimalApiExperiments.ApplicationCore.Features.Products.Commands;
 using MinimalApiExperiments.ApplicationCore.Features.Products.Queries;
+using MinimalApiExperiments.Common.Extensions;
 
 namespace MinimalApiExperiments.Modules;
 public static class ProductsModule

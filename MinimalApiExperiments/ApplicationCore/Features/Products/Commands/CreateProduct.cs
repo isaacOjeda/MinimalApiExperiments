@@ -1,8 +1,9 @@
-﻿using ApplicationCore.Domain.Entities;
+﻿
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using MinimalApiExperiments.ApplicationCore.Common;
+using MinimalApiExperiments.ApplicationCore.Domain.Entities;
 using MinimalApiExperiments.ApplicationCore.Infrastructure.Persistence;
 
 namespace MinimalApiExperiments.ApplicationCore.Features.Products.Commands;
