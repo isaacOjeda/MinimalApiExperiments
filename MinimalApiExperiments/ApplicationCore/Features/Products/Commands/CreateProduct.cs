@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 namespace ApplicationCore.Features.Products.Commands;
 public class CreateProduct : IHttpRequest
 {
-    public Body Data { get; set; }
+    public Body Product { get; set; } = default!;
 
     public class Body
     {
@@ -30,8 +30,8 @@ public class CreateProductHandler : IRequestHandler<CreateProduct, IResult>
     {
         var newProduct = new Product
         {
-            Description = request.Data.Description,
-            Price = request.Data.Price
+            Description = request.Product.Description,
+            Price = request.Product.Price
         };
 
         _context.Add(newProduct);
@@ -46,10 +46,11 @@ public class CreateProductValidator : AbstractValidator<CreateProduct>
 {
     public CreateProductValidator()
     {
-        RuleFor(r => r.Data.Description)
+        RuleFor(r => r.Product.Description)
             .NotNull();
 
-        RuleFor(r => r.Data.Price)
+        RuleFor(r => r.Product.Price)
+            .GreaterThan(0)
             .NotNull();
     }
 }
