@@ -3,7 +3,7 @@ using VerticalSliceArchitecture.Domain.Entities;
 using VerticalSliceArchitecture.Features.Products.Commands;
 using VerticalSliceArchitecture.Features.Products.Queries;
 
-namespace VerticalSliceArchitecture.Modules;
+namespace VerticalSliceArchitecture.Features.Products;
 public static class ProductsModule
 {
     public static RouteGroupBuilder AddProductsModule(this RouteGroupBuilder group)

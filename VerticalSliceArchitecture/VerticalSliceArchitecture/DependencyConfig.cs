@@ -1,7 +1,5 @@
 ﻿using FluentValidation;
 using MediatR;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using VerticalSliceArchitecture.Common.Behaviours;
 using VerticalSliceArchitecture.Infrastructure.Persistence;

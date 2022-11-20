@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using VerticalSliceArchitecture.Common.Interfaces;
 using VerticalSliceArchitecture.Domain.Entities;

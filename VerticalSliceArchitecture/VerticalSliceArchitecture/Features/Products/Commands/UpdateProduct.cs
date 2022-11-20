@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using VerticalSliceArchitecture.Common.Interfaces;
 using VerticalSliceArchitecture.Infrastructure.Persistence;
 
