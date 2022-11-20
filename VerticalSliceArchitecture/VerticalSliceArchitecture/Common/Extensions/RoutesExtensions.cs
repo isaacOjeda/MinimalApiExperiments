@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using VerticalSliceArchitecture.ApplicationCore.Common.Interfaces;
+using VerticalSliceArchitecture.Common.Interfaces;
 
 namespace VerticalSliceArchitecture.Common.Extensions;
 public static class RoutesExtensions

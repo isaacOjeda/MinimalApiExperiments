@@ -3,10 +3,10 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using VerticalSliceArchitecture.ApplicationCore.Common.Behaviours;
-using VerticalSliceArchitecture.ApplicationCore.Infrastructure.Persistence;
+using VerticalSliceArchitecture.Common.Behaviours;
+using VerticalSliceArchitecture.Infrastructure.Persistence;
 
-namespace VerticalSliceArchitecture.ApplicationCore;
+namespace VerticalSliceArchitecture;
 public static class DependencyConfig
 {
     public static IServiceCollection AddApplicationCore(this IServiceCollection services)

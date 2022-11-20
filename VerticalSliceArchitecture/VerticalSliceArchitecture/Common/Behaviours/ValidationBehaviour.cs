@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
-namespace VerticalSliceArchitecture.ApplicationCore.Common.Behaviours;
+namespace VerticalSliceArchitecture.Common.Behaviours;
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
     where TResponse : IResult

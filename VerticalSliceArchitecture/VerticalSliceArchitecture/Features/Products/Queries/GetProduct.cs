@@ -3,11 +3,11 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using VerticalSliceArchitecture.ApplicationCore.Common.Interfaces;
-using VerticalSliceArchitecture.ApplicationCore.Domain.Entities;
-using VerticalSliceArchitecture.ApplicationCore.Infrastructure.Persistence;
+using VerticalSliceArchitecture.Common.Interfaces;
+using VerticalSliceArchitecture.Domain.Entities;
+using VerticalSliceArchitecture.Infrastructure.Persistence;
 
-namespace VerticalSliceArchitecture.ApplicationCore.Features.Products.Queries;
+namespace VerticalSliceArchitecture.Features.Products.Queries;
 public class GetProduct : IHttpRequest
 {
     public int ProductId { get; set; }

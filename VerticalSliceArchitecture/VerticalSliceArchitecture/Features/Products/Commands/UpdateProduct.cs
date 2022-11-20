@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using VerticalSliceArchitecture.ApplicationCore.Common.Interfaces;
-using VerticalSliceArchitecture.ApplicationCore.Infrastructure.Persistence;
+using VerticalSliceArchitecture.Common.Interfaces;
+using VerticalSliceArchitecture.Infrastructure.Persistence;
 
-namespace VerticalSliceArchitecture.ApplicationCore.Features.Products.Commands;
+namespace VerticalSliceArchitecture.Features.Products.Commands;
 public class UpdateProduct : IHttpRequest
 {
     public UpdateProductBody Product { get; set; } = default!;

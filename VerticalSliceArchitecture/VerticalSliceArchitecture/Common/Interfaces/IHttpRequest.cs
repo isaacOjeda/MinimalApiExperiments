@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 
-namespace VerticalSliceArchitecture.ApplicationCore.Common.Interfaces;
+namespace VerticalSliceArchitecture.Common.Interfaces;
 public interface IHttpRequest : IRequest<IResult>
 {
 }

@@ -1,4 +1,4 @@
-using VerticalSliceArchitecture.ApplicationCore;
+using VerticalSliceArchitecture;
 using VerticalSliceArchitecture.Modules;
 
 var builder = WebApplication.CreateBuilder(args);

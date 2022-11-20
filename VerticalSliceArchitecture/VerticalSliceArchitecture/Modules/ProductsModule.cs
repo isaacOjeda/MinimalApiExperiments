@@ -1,7 +1,7 @@
-﻿using VerticalSliceArchitecture.ApplicationCore.Domain.Entities;
-using VerticalSliceArchitecture.ApplicationCore.Features.Products.Commands;
-using VerticalSliceArchitecture.ApplicationCore.Features.Products.Queries;
-using VerticalSliceArchitecture.Common.Extensions;
+﻿using VerticalSliceArchitecture.Common.Extensions;
+using VerticalSliceArchitecture.Domain.Entities;
+using VerticalSliceArchitecture.Features.Products.Commands;
+using VerticalSliceArchitecture.Features.Products.Queries;
 
 namespace VerticalSliceArchitecture.Modules;
 public static class ProductsModule
