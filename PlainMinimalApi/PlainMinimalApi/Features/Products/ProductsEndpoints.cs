@@ -6,8 +6,10 @@ using PlainMinimalApi.Features.Products.Queries;
 namespace PlainMinimalApi.Features.Products;
 public static class ProductsEndpoints
 {
-    public static RouteGroupBuilder MapProducts(this RouteGroupBuilder group)
+    public static RouteGroupBuilder MapProducts(this WebApplication app)
     {
+        var group = app.MapGroup("api/products");
+
         group.MapGet("/", GetProducts.Handle)
             .WithName(nameof(GetProducts));
 

@@ -22,10 +22,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
-app.MapGroup("api/products")
-    .MapProducts();
-
+app.MapProducts();
 
 await SeedData();
 
