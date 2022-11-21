@@ -101,7 +101,7 @@ public class ProductsTests : TestBase
         {
             Description = "Description Test"
         });
-        var newProduct = new CreateProductRequest
+        var newProduct = new CreateProductCommand
         {
             Description = $"Test_{Guid.NewGuid()}",
             Price = 999,
@@ -124,7 +124,7 @@ public class ProductsTests : TestBase
     {
         // Arrenge
         var http = Application.CreateDefaultClient();
-        var newProduct = new CreateProductRequest
+        var newProduct = new CreateProductCommand
         {
             Description = "Test",
             Price = 0

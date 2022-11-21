@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using PlainMinimalApi.Infrastructure.Persistence;
 
 namespace PlainMinimalApi.Features.Products.Queries;
-public static class GetProductById
+public static class GetProductHandler
 {
-    public static async Task<Results<Ok<GetProductResponse>, NotFound>> Handle(AppDbContext context, int id)
+    public static async Task<Results<Ok<GetProductResponse>, NotFound>> Handler(AppDbContext context, int id)
     {
         var product = await context.Products
             .Select(s => new GetProductResponse

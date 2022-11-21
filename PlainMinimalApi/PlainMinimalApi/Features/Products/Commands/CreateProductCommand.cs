@@ -6,16 +6,16 @@ using PlainMinimalApi.Infrastructure.Persistence;
 namespace PlainMinimalApi.Features.Products.Commands;
 
 
-public class CreateProductRequest
+public class CreateProductCommand
 {
     public double Price { get; set; }
     public string Description { get; set; } = default!;
     public int CategoryId { get; set; }
 }
 
-public static class CreateProduct
+public static class CreateProductHandler
 {
-    public static async Task<Ok> Handle(AppDbContext context, [Validate] CreateProductRequest request)
+    public static async Task<Ok> Handler(AppDbContext context, [Validate] CreateProductCommand request)
     {
         var newProduct = new Product
         {
@@ -34,7 +34,7 @@ public static class CreateProduct
 }
 
 
-public class CreateProductValidator : AbstractValidator<CreateProductRequest>
+public class CreateProductValidator : AbstractValidator<CreateProductCommand>
 {
     public CreateProductValidator()
     {

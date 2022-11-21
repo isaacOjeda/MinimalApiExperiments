@@ -10,15 +10,15 @@ public static class ProductsEndpoints
     {
         var group = app.MapGroup("api/products");
 
-        group.MapGet("/", GetProducts.Handle)
-            .WithName(nameof(GetProducts));
+        group.MapGet("/", GetProductsHandler.Handler)
+            .WithName(nameof(GetProductsHandler));
 
-        group.MapPost("/", CreateProduct.Handle)
-            .WithName(nameof(CreateProduct));
+        group.MapPost("/", CreateProductHandler.Handler)
+            .WithName(nameof(CreateProductHandler));
 
 
-        group.MapGet("/{id}", GetProductById.Handle)
-            .WithName(nameof(GetProductById));
+        group.MapGet("/{id}", GetProductHandler.Handler)
+            .WithName(nameof(GetProductHandler));
 
 
         group.WithTags(new string[] { nameof(Product) });

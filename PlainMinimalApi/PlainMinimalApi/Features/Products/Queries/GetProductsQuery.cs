@@ -3,9 +3,9 @@ using PlainMinimalApi.Infrastructure.Persistence;
 
 namespace PlainMinimalApi.Features.Products.Queries;
 
-public static class GetProducts
+public static class GetProductsHandler
 {
-    public static async Task<List<GetProductsResponse>> Handle(AppDbContext context)
+    public static async Task<List<GetProductsResponse>> Handler(AppDbContext context)
     {
         return await context.Products
             .Select(s => new GetProductsResponse
