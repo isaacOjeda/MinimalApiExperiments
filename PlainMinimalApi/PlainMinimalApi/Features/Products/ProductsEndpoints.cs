@@ -15,6 +15,10 @@ public static class ProductsEndpoints
             .WithName(nameof(CreateProduct));
 
 
+        group.MapGet("/{id}", GetProductById.Handle)
+            .WithName(nameof(GetProductById));
+
+
         group.WithTags(new string[] { nameof(Product) });
         group.WithOpenApi();
 

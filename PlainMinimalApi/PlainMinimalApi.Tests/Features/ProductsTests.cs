@@ -54,6 +54,45 @@ public class ProductsTests : TestBase
 
 
     [Test]
+    public async Task GetProductById()
+    {
+        // Arrenge
+        var http = Application.CreateDefaultClient();
+        var product = await AddEntity(new Product
+        {
+            Description = "Test 01",
+            Price = 999,
+            Category = new Category
+            {
+                Description = "Test"
+            }
+        });
+
+        // Act
+        var result = await http.GetFromJsonAsync<GetProductResponse>($"api/products/{product.ProductId}");
+
+        // Assert
+        result.Should().NotBeNull();
+        result.ProductId.Should().Be(product.ProductId);
+    }
+
+
+    [Test]
+    public async Task GetProductById_NotFound()
+    {
+        // Arrenge
+        var http = Application.CreateDefaultClient();
+
+
+        // Act
+        var result = await http.GetAsync($"api/products/123");
+
+        // Assert
+        result.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+
+    [Test]
     public async Task CreateProductSuccess()
     {
         // Arrenge

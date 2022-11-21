@@ -1,4 +1,5 @@
 using FluentValidation;
+using PlainMinimalApi.Domain.Entities;
 using PlainMinimalApi.Features.Products;
 using PlainMinimalApi.Infrastructure.Persistence;
 
@@ -26,4 +27,32 @@ app.MapGroup("api/products")
     .MapProducts();
 
 
+await SeedData();
+
 app.Run();
+
+
+
+
+async Task SeedData()
+{
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+    if (!context.Products.Any())
+    {
+
+
+        context.Add(new Product
+        {
+            Description = "Samsung TV 01",
+            Price = 12599,
+            Category = new Category
+            {
+                Description = "Electronics"
+            }
+        });
+
+        await context.SaveChangesAsync();
+    }
+}

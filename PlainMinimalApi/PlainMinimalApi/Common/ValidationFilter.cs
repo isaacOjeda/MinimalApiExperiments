@@ -57,7 +57,8 @@ public static class ValidationFilter
     }
 
     /// <summary>
-    /// Busca los validadores de cualquier clase que tenga el atributo [Validate]
+    /// Busca los validadores de cualquier clase en los parámetros
+    /// que tenga el atributo [Validate]
     /// </summary>
     /// <param name="methodInfo"></param>
     /// <param name="serviceProvider"></param>
