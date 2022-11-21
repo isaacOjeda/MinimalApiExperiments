@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>net7.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
+
+	<IsPackable>false</IsPackable>
+
+	<UserSecretsId>789bf69f-80c7-4328-9bc5-8f9458a8e1c5</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.0" />
+	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+	<PackageReference Include="NUnit" Version="3.13.3" />
+	<PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+	<PackageReference Include="NUnit.Analyzers" Version="3.3.0" />
+	<PackageReference Include="coverlet.collector" Version="3.1.2" />
+	<PackageReference Include="Respawn" Version="5.0.1" />
+	  <PackageReference Include="FluentAssertions" Version="6.7.0" />
+	
+  </ItemGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="..\PlainMinimalApi\PlainMinimalApi.csproj" />
+  </ItemGroup>
+
+</Project>
