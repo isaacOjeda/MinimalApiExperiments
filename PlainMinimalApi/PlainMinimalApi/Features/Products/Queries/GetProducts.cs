@@ -12,7 +12,8 @@ public static class GetProducts
             {
                 Description = s.Description,
                 Price = s.Price,
-                ProductId = s.ProductId
+                ProductId = s.ProductId,
+                Category = s.Category.Description
             })
             .ToListAsync();
     }
@@ -22,5 +23,6 @@ public class GetProductsResponse
 {
     public int ProductId { get; set; }
     public string? Description { get; set; }
+    public string? Category { get; set; }
     public double Price { get; set; }
 }

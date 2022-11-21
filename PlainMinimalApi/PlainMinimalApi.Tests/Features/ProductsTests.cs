@@ -16,10 +16,16 @@ public class ProductsTests : TestBase
     public async Task GetProducts()
     {
         // Arrenge
+        var category = await AddEntity(new Category
+        {
+            Description = "Description Test"
+        });
+
         await AddEntity(new Product
         {
             Description = "Test",
-            Price = 999
+            Price = 999,
+            CategoryId = category.CategoryId
         });
 
         var http = Application.CreateDefaultClient();
@@ -52,10 +58,15 @@ public class ProductsTests : TestBase
     {
         // Arrenge
         var http = Application.CreateDefaultClient();
+        var category = await AddEntity(new Category
+        {
+            Description = "Description Test"
+        });
         var newProduct = new CreateProductRequest
         {
-            Description = "Test",
-            Price = 999
+            Description = $"Test_{Guid.NewGuid()}",
+            Price = 999,
+            CategoryId = category.CategoryId
         };
 
         // Act
@@ -63,6 +74,10 @@ public class ProductsTests : TestBase
 
         // Assert
         result.IsSuccessStatusCode.Should().BeTrue();
+        var exists = await FindEntity<Product>(q => q.Description == newProduct.Description);
+
+        exists.Should().NotBeNull();
+        exists.Description.Should().Be(newProduct.Description);
     }
 
     [Test]

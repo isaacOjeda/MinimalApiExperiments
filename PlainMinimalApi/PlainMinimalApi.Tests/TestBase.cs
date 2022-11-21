@@ -5,6 +5,7 @@ using NUnit.Framework;
 using PlainMinimalApi.Infrastructure.Persistence;
 using Respawn;
 using Respawn.Graph;
+using System.Linq.Expressions;
 
 namespace PlainMinimalApi.Tests;
 public class TestBase
@@ -38,6 +39,16 @@ public class TestBase
 
         return entity;
     }
+
+    public async Task<T> FindEntity<T>(Expression<Func<T, bool>> predicate)
+        where T : class
+    {
+        using var scope = Application.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+        return await context.Set<T>().FirstOrDefaultAsync(predicate);
+    }
+
 
     [SetUp]
     public async Task Setup()
