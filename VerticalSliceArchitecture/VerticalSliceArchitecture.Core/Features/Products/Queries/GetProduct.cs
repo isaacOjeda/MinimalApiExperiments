@@ -1,18 +1,20 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using FluentResults;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using VerticalSliceArchitecture.Common.Interfaces;
-using VerticalSliceArchitecture.Domain.Entities;
-using VerticalSliceArchitecture.Infrastructure.Persistence;
+using VerticalSliceArchitecture.Core.Common.Errors;
+using VerticalSliceArchitecture.Core.Common.Interfaces;
+using VerticalSliceArchitecture.Core.Domain.Entities;
+using VerticalSliceArchitecture.Core.Infrastructure.Persistence;
 
-namespace VerticalSliceArchitecture.Features.Products.Queries;
-public class GetProduct : IHttpRequest
+namespace VerticalSliceArchitecture.Core.Features.Products.Queries;
+public class GetProduct : IHttpRequest<GetProductResponse>
 {
     public int ProductId { get; set; }
 }
 
-public class GetProductHandler : IRequestHandler<GetProduct, IResult>
+public class GetProductHandler : IRequestHandler<GetProduct, Result<GetProductResponse>>
 {
     private readonly AppDbContext _context;
     private readonly IMapper _mapper;
@@ -22,7 +24,7 @@ public class GetProductHandler : IRequestHandler<GetProduct, IResult>
         _context = context;
         _mapper = mapper;
     }
-    public async Task<IResult> Handle(GetProduct request, CancellationToken cancellationToken)
+    public async Task<Result<GetProductResponse>> Handle(GetProduct request, CancellationToken cancellationToken)
     {
         var product = await _context.Products
             .ProjectTo<GetProductResponse>(_mapper.ConfigurationProvider)
@@ -30,10 +32,11 @@ public class GetProductHandler : IRequestHandler<GetProduct, IResult>
 
         if (product is null)
         {
-            return Results.NotFound();
+            return Result.Fail(NotFoundError.Create(nameof(Product)));
         }
 
-        return Results.Ok(product);
+
+        return Result.Ok(product);
     }
 
 }

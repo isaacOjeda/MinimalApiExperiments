@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VerticalSliceArchitecture.Domain.Entities;
+using VerticalSliceArchitecture.Core.Domain.Entities;
 
-namespace VerticalSliceArchitecture.Infrastructure.Persistence;
+namespace VerticalSliceArchitecture.Core.Infrastructure.Persistence;
 public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options)

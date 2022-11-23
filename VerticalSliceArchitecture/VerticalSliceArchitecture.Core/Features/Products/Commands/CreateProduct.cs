@@ -1,11 +1,13 @@
 ﻿
+using FluentResults;
 using FluentValidation;
 using MediatR;
-using VerticalSliceArchitecture.Common.Interfaces;
-using VerticalSliceArchitecture.Domain.Entities;
-using VerticalSliceArchitecture.Infrastructure.Persistence;
+using VerticalSliceArchitecture.Core.Common.Interfaces;
+using VerticalSliceArchitecture.Core.Domain.Entities;
+using VerticalSliceArchitecture.Core.Infrastructure.Persistence;
 
-namespace VerticalSliceArchitecture.Features.Products.Commands;
+
+namespace VerticalSliceArchitecture.Core.Features.Products.Commands;
 public class CreateProduct : IHttpRequest
 {
     public CreateProductBody Product { get; set; } = default!;
@@ -17,7 +19,7 @@ public class CreateProduct : IHttpRequest
     }
 }
 
-public class CreateProductHandler : IRequestHandler<CreateProduct, IResult>
+public class CreateProductHandler : IRequestHandler<CreateProduct, Result>
 {
     private readonly AppDbContext _context;
 
@@ -26,7 +28,7 @@ public class CreateProductHandler : IRequestHandler<CreateProduct, IResult>
         _context = context;
     }
 
-    public async Task<IResult> Handle(CreateProduct request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(CreateProduct request, CancellationToken cancellationToken)
     {
         var newProduct = new Product
         {
@@ -38,7 +40,7 @@ public class CreateProductHandler : IRequestHandler<CreateProduct, IResult>
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return Results.Created($"api/products/{newProduct.ProductId}", newProduct);
+        return Result.Ok();
     }
 }
 

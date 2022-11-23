@@ -1,10 +1,12 @@
-﻿using FluentValidation;
+﻿using FluentResults;
+using FluentValidation;
 using MediatR;
+using VerticalSliceArchitecture.Core.Common.Errors;
 
-namespace VerticalSliceArchitecture.Common.Behaviours;
+namespace VerticalSliceArchitecture.Core.Common.Behaviours;
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
-    where TResponse : IResult
+    where TResponse : Result
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -29,10 +31,10 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
                 .ToList();
 
             if (failures.Any())
-                return (TResponse)Results.ValidationProblem(failures
-                    .GroupBy(e => e.PropertyName, e => e.ErrorMessage)
-                    .ToDictionary(failureGroup => failureGroup.Key, failureGroup => failureGroup.ToArray())
-                );
+            {
+                return (TResponse)Result.Fail(new ValidationError(failures));
+            }
+
         }
 
         return await next();

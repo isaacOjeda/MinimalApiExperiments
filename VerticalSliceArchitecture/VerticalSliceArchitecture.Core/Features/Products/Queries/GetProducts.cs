@@ -1,19 +1,20 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using FluentResults;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using VerticalSliceArchitecture.Common.Interfaces;
-using VerticalSliceArchitecture.Domain.Entities;
-using VerticalSliceArchitecture.Infrastructure.Persistence;
+using VerticalSliceArchitecture.Core.Common.Interfaces;
+using VerticalSliceArchitecture.Core.Domain.Entities;
+using VerticalSliceArchitecture.Core.Infrastructure.Persistence;
 
-namespace VerticalSliceArchitecture.Features.Products.Queries;
+namespace VerticalSliceArchitecture.Core.Features.Products.Queries;
 
-public class GetProducts : IHttpRequest
+public class GetProducts : IHttpRequest<List<GetProductsResponse>>
 {
 
 }
 
-public class GetProductsHandler : IRequestHandler<GetProducts, IResult>
+public class GetProductsHandler : IRequestHandler<GetProducts, Result<List<GetProductsResponse>>>
 {
     private readonly AppDbContext _context;
     private readonly IMapper _mapper;
@@ -24,11 +25,12 @@ public class GetProductsHandler : IRequestHandler<GetProducts, IResult>
         _mapper = mapper;
     }
 
-    public async Task<IResult> Handle(GetProducts request, CancellationToken cancellationToken) =>
-        Results.Ok(
+    public async Task<Result<List<GetProductsResponse>>> Handle(GetProducts request, CancellationToken cancellationToken) =>
+        Result.Ok(
             await _context.Products
                 .ProjectTo<GetProductsResponse>(_mapper.ConfigurationProvider)
-                .ToListAsync());
+                .ToListAsync()
+        );
 }
 
 public class GetProductsResponse

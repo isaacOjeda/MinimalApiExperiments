@@ -1,9 +1,12 @@
-﻿using FluentValidation;
+﻿using FluentResults;
+using FluentValidation;
 using MediatR;
-using VerticalSliceArchitecture.Common.Interfaces;
-using VerticalSliceArchitecture.Infrastructure.Persistence;
+using VerticalSliceArchitecture.Core.Common.Errors;
+using VerticalSliceArchitecture.Core.Common.Interfaces;
+using VerticalSliceArchitecture.Core.Domain.Entities;
+using VerticalSliceArchitecture.Core.Infrastructure.Persistence;
 
-namespace VerticalSliceArchitecture.Features.Products.Commands;
+namespace VerticalSliceArchitecture.Core.Features.Products.Commands;
 public class UpdateProduct : IHttpRequest
 {
     public UpdateProductBody Product { get; set; } = default!;
@@ -17,7 +20,7 @@ public class UpdateProduct : IHttpRequest
 }
 
 
-public class UpdateProductHandler : IRequestHandler<UpdateProduct, IResult>
+public class UpdateProductHandler : IRequestHandler<UpdateProduct, Result>
 {
     private readonly AppDbContext _context;
 
@@ -26,13 +29,13 @@ public class UpdateProductHandler : IRequestHandler<UpdateProduct, IResult>
         _context = context;
     }
 
-    public async Task<IResult> Handle(UpdateProduct request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(UpdateProduct request, CancellationToken cancellationToken)
     {
         var product = await _context.Products.FindAsync(request.Product.ProductId);
 
         if (product is null)
         {
-            return Results.NotFound();
+            return Result.Fail(NotFoundError.Create(nameof(Product)));
         }
 
 
@@ -41,7 +44,7 @@ public class UpdateProductHandler : IRequestHandler<UpdateProduct, IResult>
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return Results.Ok();
+        return Result.Ok();
     }
 }
 

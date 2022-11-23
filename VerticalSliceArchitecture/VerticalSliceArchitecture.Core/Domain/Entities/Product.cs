@@ -1,4 +1,4 @@
-﻿namespace VerticalSliceArchitecture.Domain.Entities;
+﻿namespace VerticalSliceArchitecture.Core.Domain.Entities;
 
 public class Product
 {

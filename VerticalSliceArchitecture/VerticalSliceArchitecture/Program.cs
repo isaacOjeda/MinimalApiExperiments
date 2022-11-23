@@ -1,5 +1,5 @@
-using VerticalSliceArchitecture;
-using VerticalSliceArchitecture.Features.Products;
+using VerticalSliceArchitecture.Core;
+using VerticalSliceArchitecture.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 

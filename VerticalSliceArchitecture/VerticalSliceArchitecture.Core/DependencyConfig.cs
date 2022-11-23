@@ -1,10 +1,12 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using VerticalSliceArchitecture.Common.Behaviours;
-using VerticalSliceArchitecture.Infrastructure.Persistence;
+using VerticalSliceArchitecture.Core.Common.Behaviours;
+using VerticalSliceArchitecture.Core.Infrastructure.Persistence;
 
-namespace VerticalSliceArchitecture;
+namespace VerticalSliceArchitecture.Core;
 public static class DependencyConfig
 {
     public static IServiceCollection AddApplicationCore(this IServiceCollection services)
