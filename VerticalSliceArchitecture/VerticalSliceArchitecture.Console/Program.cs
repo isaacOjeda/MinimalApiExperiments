@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console;
 using VerticalSliceArchitecture.Core;
+using VerticalSliceArchitecture.Core.Common.Errors;
 using VerticalSliceArchitecture.Core.Features.Products.Queries;
 
 var configuration = new ConfigurationBuilder()
@@ -25,20 +26,59 @@ AnsiConsole.Write(
     );
 
 
+var productIdToSearch = AnsiConsole.Ask<int>("Buscar productos por ID");
 var sender = serviceCollection.GetRequiredService<ISender>();
 
-AnsiConsole.MarkupLine("[b]Loading Products from database [/]");
-
-var queryResult = await sender.Send(new GetProducts());
+var queryResult = await sender.Send(new GetProduct
+{
+    ProductId = productIdToSearch
+});
 
 
 if (queryResult.IsSuccess)
 {
-    AnsiConsole.MarkupLine("[b green]Done. [/]");
-    foreach (var product in queryResult.Value)
-    {
-        AnsiConsole.WriteLine("Description: {0} - Price: {1:c}", product.Description, product.Price);
-    }
+    var product = queryResult.Value;
+    AnsiConsole.WriteLine($"El precio de {product.Description} es {product.Price:c}");
 }
+else
+{
+    var firstError = queryResult.Errors.FirstOrDefault();
+
+    var message = firstError switch
+    {
+        NotFoundError notfound => $"[b red]Producto no encontrado[/] \n {notfound.Message}",
+        _ => "[b red]Ocurrió un error no esperado[/]"
+    };
+
+    AnsiConsole.MarkupLine(message);
+}
+
+//var sender = serviceCollection.GetRequiredService<ISender>();
+
+//AnsiConsole.MarkupLine("[b]Loading Products from database [/]");
+
+//var queryResult = await sender.Send(new GetProducts());
+
+
+//if (queryResult.IsSuccess)
+//{
+//    AnsiConsole.MarkupLine("[b green]Done. [/]");
+//    var grid = new Grid();
+
+//    // Add columns 
+//    grid.AddColumn();
+//    grid.AddColumn();
+
+//    // Add header row 
+//    grid.AddRow(new string[] { "Description", "Price" });
+
+//    // Write to Console
+//    foreach (var product in queryResult.Value)
+//    {
+//        grid.AddRow(new string[] { product.Description, product.Price.ToString("c") });
+//    }
+
+//    AnsiConsole.Write(grid);
+//}
 
 
