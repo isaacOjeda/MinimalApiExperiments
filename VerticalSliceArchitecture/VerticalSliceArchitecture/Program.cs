@@ -22,7 +22,6 @@ app.UseHttpsRedirection();
 
 app.MapGet("/", () => "Hello Minimal API Experiments!");
 
-app.MapGroup("api/products")
-    .AddProductsModule();
+app.AddProductsModule();
 
 app.Run();

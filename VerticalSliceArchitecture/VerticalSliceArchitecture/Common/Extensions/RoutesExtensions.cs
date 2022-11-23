@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using VerticalSliceArchitecture.Core.Common.Errors;
 using VerticalSliceArchitecture.Core.Common.Interfaces;
 
@@ -68,7 +69,7 @@ public static class RoutesExtensions
     }
 
 
-    private static async Task<IResult> HandleResult<TRequest, TResponse>(IMediator mediator, TRequest request)
+    private static async Task<Results<ValidationProblem, Ok<TResponse>, NotFound, ProblemHttpResult>> HandleResult<TRequest, TResponse>(IMediator mediator, TRequest request)
         where TRequest : IHttpRequest<TResponse>
         where TResponse : class
     {
@@ -83,17 +84,17 @@ public static class RoutesExtensions
 
         return error switch
         {
-            ValidationError validationError => Results.ValidationProblem(
+            ValidationError validationError => TypedResults.ValidationProblem(
                 validationError.Failures
                     .GroupBy(e => e.PropertyName, e => e.ErrorMessage)
                     .ToDictionary(failureGroup => failureGroup.Key, failureGroup => failureGroup.ToArray())
             ),
-            NotFoundError notFound => Results.NotFound(notFound.Message),
-            _ => Results.Problem(detail: error?.Message ?? "An error has ocurred.")
+            NotFoundError notFound => TypedResults.NotFound(),
+            _ => TypedResults.Problem(detail: error?.Message ?? "An error has ocurred.")
         };
     }
 
-    private static async Task<IResult> HandleVoidResult<TRequest>(IMediator mediator, TRequest request) where TRequest : IHttpRequest
+    private static async Task<Results<Ok, ValidationProblem, NotFound, ProblemHttpResult>> HandleVoidResult<TRequest>(IMediator mediator, TRequest request) where TRequest : IHttpRequest
     {
         FluentResults.Result results = await mediator.Send(request);
 
@@ -106,13 +107,13 @@ public static class RoutesExtensions
 
         return error switch
         {
-            ValidationError validationError => Results.ValidationProblem(
+            ValidationError validationError => TypedResults.ValidationProblem(
                 validationError.Failures
                     .GroupBy(e => e.PropertyName, e => e.ErrorMessage)
                     .ToDictionary(failureGroup => failureGroup.Key, failureGroup => failureGroup.ToArray())
             ),
-            NotFoundError notFound => Results.NotFound(notFound.Message),
-            _ => Results.Problem(detail: error?.Message ?? "An error has ocurred.")
+            NotFoundError notFound => TypedResults.NotFound(),
+            _ => TypedResults.Problem(detail: error?.Message ?? "An error has ocurred.")
         };
     }
 

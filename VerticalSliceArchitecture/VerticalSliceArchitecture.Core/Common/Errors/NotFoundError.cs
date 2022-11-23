@@ -17,5 +17,5 @@ public class NotFoundError : Error
 
 
 	public static NotFoundError Create(string entityName) =>
-		new NotFoundError(entityName);
+		new(entityName);
 }
