@@ -9,6 +9,7 @@ using VerticalSliceArchitecture.Core.Domain.Entities;
 using VerticalSliceArchitecture.Core.Infrastructure.Persistence;
 
 namespace VerticalSliceArchitecture.Core.Features.Products.Queries;
+
 public class GetProduct : IHttpRequest<GetProductResponse>
 {
     public int ProductId { get; set; }
@@ -24,6 +25,7 @@ public class GetProductHandler : IRequestHandler<GetProduct, Result<GetProductRe
         _context = context;
         _mapper = mapper;
     }
+
     public async Task<Result<GetProductResponse>> Handle(GetProduct request, CancellationToken cancellationToken)
     {
         var product = await _context.Products
@@ -38,7 +40,6 @@ public class GetProductHandler : IRequestHandler<GetProduct, Result<GetProductRe
 
         return Result.Ok(product);
     }
-
 }
 
 public class GetProductResponse

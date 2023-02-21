@@ -7,6 +7,7 @@ using VerticalSliceArchitecture.Core.Common.Behaviours;
 using VerticalSliceArchitecture.Core.Infrastructure.Persistence;
 
 namespace VerticalSliceArchitecture.Core;
+
 public static class DependencyConfig
 {
     public static IServiceCollection AddApplicationCore(this IServiceCollection services)

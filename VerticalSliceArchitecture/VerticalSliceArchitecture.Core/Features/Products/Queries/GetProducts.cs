@@ -11,7 +11,6 @@ namespace VerticalSliceArchitecture.Core.Features.Products.Queries;
 
 public class GetProducts : IHttpRequest<List<GetProductsResponse>>
 {
-
 }
 
 public class GetProductsHandler : IRequestHandler<GetProducts, Result<List<GetProductsResponse>>>
@@ -25,7 +24,8 @@ public class GetProductsHandler : IRequestHandler<GetProducts, Result<List<GetPr
         _mapper = mapper;
     }
 
-    public async Task<Result<List<GetProductsResponse>>> Handle(GetProducts request, CancellationToken cancellationToken) =>
+    public async Task<Result<List<GetProductsResponse>>> Handle(GetProducts request,
+        CancellationToken cancellationToken) =>
         Result.Ok(
             await _context.Products
                 .ProjectTo<GetProductsResponse>(_mapper.ConfigurationProvider)

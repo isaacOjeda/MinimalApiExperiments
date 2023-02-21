@@ -1,5 +1,4 @@
-﻿
-using FluentResults;
+﻿using FluentResults;
 using FluentValidation;
 using MediatR;
 using VerticalSliceArchitecture.Core.Common.Interfaces;
@@ -8,6 +7,7 @@ using VerticalSliceArchitecture.Core.Infrastructure.Persistence;
 
 
 namespace VerticalSliceArchitecture.Core.Features.Products.Commands;
+
 public class CreateProduct : IHttpRequest
 {
     public CreateProductBody Product { get; set; } = default!;

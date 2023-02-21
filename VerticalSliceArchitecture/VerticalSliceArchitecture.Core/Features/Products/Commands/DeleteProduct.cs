@@ -6,6 +6,7 @@ using VerticalSliceArchitecture.Core.Domain.Entities;
 using VerticalSliceArchitecture.Core.Infrastructure.Persistence;
 
 namespace VerticalSliceArchitecture.Core.Features.Products.Commands;
+
 public class DeleteProduct : IHttpRequest
 {
     public int ProductId { get; set; }

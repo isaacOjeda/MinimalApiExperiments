@@ -4,6 +4,7 @@ using VerticalSliceArchitecture.Core.Features.Products.Commands;
 using VerticalSliceArchitecture.Core.Features.Products.Queries;
 
 namespace VerticalSliceArchitecture.Modules;
+
 public static class ProductsModule
 {
     public static WebApplication AddProductsModule(this WebApplication app)

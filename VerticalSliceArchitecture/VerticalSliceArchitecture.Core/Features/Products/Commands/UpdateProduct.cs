@@ -7,6 +7,7 @@ using VerticalSliceArchitecture.Core.Domain.Entities;
 using VerticalSliceArchitecture.Core.Infrastructure.Persistence;
 
 namespace VerticalSliceArchitecture.Core.Features.Products.Commands;
+
 public class UpdateProduct : IHttpRequest
 {
     public UpdateProductBody Product { get; set; } = default!;
@@ -18,7 +19,6 @@ public class UpdateProduct : IHttpRequest
         public double Price { get; set; }
     }
 }
-
 
 public class UpdateProductHandler : IRequestHandler<UpdateProduct, Result>
 {
