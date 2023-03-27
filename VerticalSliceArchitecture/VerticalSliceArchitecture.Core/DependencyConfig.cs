@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -12,8 +11,12 @@ public static class DependencyConfig
 {
     public static IServiceCollection AddApplicationCore(this IServiceCollection services)
     {
-        services.AddMediatR(Assembly.GetExecutingAssembly());
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+        });
+
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 

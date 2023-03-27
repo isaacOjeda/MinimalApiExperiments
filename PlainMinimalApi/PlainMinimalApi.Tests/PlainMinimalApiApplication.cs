@@ -8,7 +8,6 @@ namespace PlainMinimalApi.Tests;
 
 public class PlainMinimalApiApplication : WebApplicationFactory<Api>
 {
-
     public const string TestConnectionString = "Server=(localdb)\\mssqllocaldb;Database=PlanMinimalApi_TestDb;Trusted_Connection=True;MultipleActiveResultSets=false";
 
 

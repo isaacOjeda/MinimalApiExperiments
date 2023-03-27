@@ -1,4 +1,5 @@
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using PlainMinimalApi.Domain.Entities;
 using PlainMinimalApi.Features.Products;
 using PlainMinimalApi.Infrastructure.Persistence;
@@ -18,13 +19,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    await SeedData();
 }
 
 app.UseHttpsRedirection();
 
 app.MapProducts();
-
-await SeedData();
 
 app.Run();
 
@@ -35,6 +36,8 @@ async Task SeedData()
 {
     using var scope = app.Services.CreateScope();
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+    context.Database.Migrate();
 
     if (!context.Products.Any())
     {

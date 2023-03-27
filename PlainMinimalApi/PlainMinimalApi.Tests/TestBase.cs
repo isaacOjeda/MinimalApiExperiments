@@ -73,14 +73,14 @@ public class TestBase
 
     private static async Task ResetState()
     {
-        var checkpoint = new Checkpoint
+        var respawner = await Respawner.CreateAsync(PlainMinimalApiApplication.TestConnectionString, new RespawnerOptions
         {
             TablesToIgnore = new Table[]
             {
-                new Table("__EFMigrationsHistory")
+                "__EFMigrationsHistory"
             }
-        };
+        });
 
-        await checkpoint.Reset(PlainMinimalApiApplication.TestConnectionString);
+        await respawner.ResetAsync(PlainMinimalApiApplication.TestConnectionString);
     }
 }
