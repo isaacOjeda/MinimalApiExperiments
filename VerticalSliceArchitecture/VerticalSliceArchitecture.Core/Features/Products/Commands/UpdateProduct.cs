@@ -53,13 +53,13 @@ public class UpdateProductValidator : AbstractValidator<UpdateProduct>
     public UpdateProductValidator()
     {
         RuleFor(r => r.Product.ProductId)
-            .NotNull();
+            .NotEqual(0);
 
         RuleFor(r => r.Product.Price)
-            .GreaterThan(0)
-            .NotNull();
+            .GreaterThan(0);
 
         RuleFor(r => r.Product.Description)
-            .NotNull();
+            .NotNull()
+            .NotEmpty();
     }
 }

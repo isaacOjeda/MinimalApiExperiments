@@ -6,8 +6,8 @@ using VerticalSliceArchitecture.Core.Common.Errors;
 namespace VerticalSliceArchitecture.Core.Common.Behaviours;
 
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>
-    where TResponse : Result
+    where TRequest : notnull
+    where TResponse : ResultBase
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -34,7 +34,12 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
 
         if (failures.Any())
         {
-            return (TResponse)Result.Fail(new ValidationError(failures));
+
+            var response = Activator.CreateInstance<TResponse>();
+
+            response.Reasons.Add(new ValidationError(failures));
+
+            return response;
         }
 
         return await next();

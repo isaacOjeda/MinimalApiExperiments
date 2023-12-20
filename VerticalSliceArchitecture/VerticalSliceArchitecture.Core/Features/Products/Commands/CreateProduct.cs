@@ -8,7 +8,7 @@ using VerticalSliceArchitecture.Core.Infrastructure.Persistence;
 
 namespace VerticalSliceArchitecture.Core.Features.Products.Commands;
 
-public class CreateProduct : IHttpRequest
+public class CreateProduct : IHttpRequest<CreateProductResponse>
 {
     public CreateProductBody Product { get; set; } = default!;
 
@@ -19,7 +19,7 @@ public class CreateProduct : IHttpRequest
     }
 }
 
-public class CreateProductHandler : IRequestHandler<CreateProduct, Result>
+public class CreateProductHandler : IRequestHandler<CreateProduct, Result<CreateProductResponse>>
 {
     private readonly AppDbContext _context;
 
@@ -28,7 +28,7 @@ public class CreateProductHandler : IRequestHandler<CreateProduct, Result>
         _context = context;
     }
 
-    public async Task<Result> Handle(CreateProduct request, CancellationToken cancellationToken)
+    public async Task<Result<CreateProductResponse>> Handle(CreateProduct request, CancellationToken cancellationToken)
     {
         var newProduct = new Product
         {
@@ -40,8 +40,13 @@ public class CreateProductHandler : IRequestHandler<CreateProduct, Result>
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return Result.Ok();
+        return Result.Ok(new CreateProductResponse { ProductId = newProduct.ProductId });
     }
+}
+
+public class CreateProductResponse
+{
+    public int ProductId { get; set; }
 }
 
 public class CreateProductValidator : AbstractValidator<CreateProduct>

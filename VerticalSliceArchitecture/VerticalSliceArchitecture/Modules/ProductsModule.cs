@@ -13,7 +13,7 @@ public static class ProductsModule
 
         group.MediatrGet<GetProducts, List<GetProductsResponse>>("/");
         group.MediatrGet<GetProduct, GetProductResponse>("/{ProductId}");
-        group.MediatrPost<CreateProduct>("/");
+        group.MediatrPost<CreateProduct, CreateProductResponse>("/");
         group.MediatrPut<UpdateProduct>("/");
         group.MediatrDelete<DeleteProduct>("/{ProductId}");
 
