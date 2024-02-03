@@ -3,6 +3,7 @@ using System.Net;
 using System.Reflection;
 
 namespace PlainMinimalApi.Common;
+
 public static class ValidationFilter
 {
     /// <summary>
@@ -13,9 +14,10 @@ public static class ValidationFilter
     /// <param name="context"></param>
     /// <param name="next"></param>
     /// <returns></returns>
-    public static EndpointFilterDelegate ValidationFilterFactory(EndpointFilterFactoryContext context, EndpointFilterDelegate next)
+    public static EndpointFilterDelegate ValidationFilterFactory(EndpointFilterFactoryContext context,
+        EndpointFilterDelegate next)
     {
-        IEnumerable<ValidationDescriptor> validationDescriptors = GetValidators(context.MethodInfo, context.ApplicationServices);
+        var validationDescriptors = GetValidators(context.MethodInfo, context.ApplicationServices).ToList();
 
         if (validationDescriptors.Any())
         {
@@ -33,7 +35,8 @@ public static class ValidationFilter
     /// <param name="invocationContext"></param>
     /// <param name="next"></param>
     /// <returns></returns>
-    private static async ValueTask<object?> Validate(IEnumerable<ValidationDescriptor> validationDescriptors, EndpointFilterInvocationContext invocationContext, EndpointFilterDelegate next)
+    private static async ValueTask<object?> Validate(IEnumerable<ValidationDescriptor> validationDescriptors,
+        EndpointFilterInvocationContext invocationContext, EndpointFilterDelegate next)
     {
         foreach (ValidationDescriptor descriptor in validationDescriptors)
         {
@@ -80,7 +83,8 @@ public static class ValidationFilter
 
                 if (validator is not null)
                 {
-                    yield return new ValidationDescriptor { ArgumentIndex = i, ArgumentType = parameter.ParameterType, Validator = validator };
+                    yield return new ValidationDescriptor
+                        { ArgumentIndex = i, ArgumentType = parameter.ParameterType, Validator = validator };
                 }
             }
         }
